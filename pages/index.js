@@ -1,26 +1,46 @@
-function HomePage() {
-    return (
-        <div>
-            <section class="u-clearfix u-section-3" id="sec-0cc7">
-                <div class="u-clearfix u-sheet u-sheet-1">
-                    <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                        <div class="u-layout">
-                            <div class="u-layout-row">
-                                {/* <div class="u-container-style u-image u-layout-cell u-size-30 u-image-1" data-image-width="400" data-image-height="265">
-                                    <div class="u-container-layout u-valign-top u-container-layout-1"></div>
-                                </div> */}
-                                <div class="u-align-center u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                    <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                        <h2 class="u-text u-text-default u-text-1">Sample Headline</h2>
-                                        <p class="u-text u-text-default u-text-2">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
-}
+
+import undrawMint from "../public/images/undraw_mint_tea_7su01.png";
+
+import undrawVisual from "../public/images/undraw_visual_data_re_mxxo.png";
+import undrawArtificial from "../public/images/undraw_Artificial_intelligence_re_enpp.png";
+import undrawBreakFast from "../public/images/undraw_breakfast_psiw.png";
+
+import SignUpButton from "../comps/SignUpButton/SignUpButton";
+import { Col, Container, Row } from "react-bootstrap";
+import DisplayCard from "../comps/DisplayCard/Card";
+const HomePage = () => {
+  let displayCards = [
+    <DisplayCard image={`/images/undraw_Artificial_intelligence_re_enpp.png`} title={`Food Image recognizer`} />,
+    <DisplayCard image={`/images/undraw_breakfast_psiw.png`} title={`Diet Generator`} />,
+    <DisplayCard image={`/images/undraw_visual_data_re_mxxo.png`} title={`Food Analyzer`} />
+  ];
+  return (
+    <Container>
+      <Row className="align-items-center">
+        <Col xs={4}>
+          <p className="home-text">
+            Switch helps you to transform your unhealthy lifestyle into a
+            Healthy Lifestyle.
+          </p>
+          <SignUpButton />
+        </Col>
+        <Col className="containterOfImage">
+          <img src='/images/undraw_mint_tea_7su01.png' alt="" />
+        </Col>
+      </Row>
+      <Row className="text-center">
+        <Col><h4>Why is it so great?</h4></Col></Row>
+      <Row><em>
+        The purpose of this project is to maintain the healthy lifestyle of the
+        people. The main purpose is to create a healthy diet chart using the
+        information entered by the user. Users can also get detailed information
+        about the particular dish by uploading its image or searching by its
+        name. Moreover, Users are also feasible to make some changes in diet
+        charts according to their needs.</em>
+      </Row>
+      <Row className="text-center">{displayCards}</Row>
+    </Container>
+  );
+};
+
 export default HomePage;

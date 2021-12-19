@@ -1,6 +1,12 @@
-.u-align-center {
-    text-align: center;
-  }
+ .u-align-center {
+  text-align: center;
+  /* height: 50px;
+  color:white;
+  bottom:0;
+  position:absolute;
+  width:100%; */
+} 
+
 .u-clearfix:after,
 .u-clearfix:before {
 content: '';
@@ -10,60 +16,57 @@ display: table;
 clear: both;
 }
 .u-footer {
-    background-image: none;
-  }
-  .u-grey-80 {
-    color: #ffffff;
-    background-color: #333333;
-  }
-  .u-sheet {
-    position: relative;
-    width: 1140px;
-    margin: 0 auto;
-  }
-  footer > *,
-  .u-sheet > * {
-    position: relative;
-  }
+  background-image: none;
+}
+.u-grey-80 {
+  color: #ffffff;
+  background-color: #333333;
+}
+.u-sheet {
+  position: relative;
+  width: 1140px;
+  margin: 0 auto;
+}
+footer > *,
+.u-sheet > * {
+  position: relative;
+}
+
+@media (max-width: 1199px) {
   .u-footer .u-sheet-1 {
-    min-height: 120px;
+    min-height: 70px;
   }
-  @media (max-width: 1199px) {
-    .u-footer .u-sheet-1 {
-      min-height: 99px;
-    }
+}
+@media (max-width: 991px) {
+  .u-footer .u-sheet-1 {
+    min-height: 76px;
   }
-  @media (max-width: 991px) {
-    .u-footer .u-sheet-1 {
-      min-height: 76px;
-    }
+}
+@media (max-width: 767px) {
+  .u-footer .u-sheet-1 {
+    min-height: 57px;
   }
-  @media (max-width: 767px) {
-    .u-footer .u-sheet-1 {
-      min-height: 57px;
-    }
+}
+@media (max-width: 575px) {
+  .u-footer .u-sheet-1 {
+    min-height: 36px;
   }
-  @media (max-width: 575px) {
-    .u-footer .u-sheet-1 {
-      min-height: 36px;
-    }
-  
-    .u-footer .u-text-1 {
-      width: 340px;
-    }
+
+  .u-footer .u-text-1 {
+    width: 340px;
   }
-  p.u-small-text
-        {
-        font-size: 0.875rem;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        }
-        p:not(.u-text-variant)
-        {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        }
-        .u-footer .u-text-1 {
-            width: 417px;
-            margin: 49px auto;
-          }
+}
+p.u-small-text
+{
+font-size: 0.875rem;
+margin-top: 20px;
+}
+p:not(.u-text-variant)
+{
+margin-top: 20px;
+}
+.u-footer .u-text-1 {
+    width: 417px;
+    margin: 25px auto;
+    color:white;
+  } 
