@@ -1,5 +1,5 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
-import undrawAuth from "../comps/svg/undrawAuth.svg";
+
 import CustButton from "../comps/CustButton/CustButton";
 
 const SignInPage = () => {
@@ -30,7 +30,7 @@ const SignInPage = () => {
           </Form>
         </Col>
         <Col md='6'>
-          <img src={undrawAuth} />
+          <img src='/svg/register.svg' />
         </Col>
       </Row>
     </Container>

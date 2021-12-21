@@ -2,8 +2,6 @@
   text-align: center;
   /* height: 50px;
   color:white;
-  bottom:0;
-  position:absolute;
   width:100%; */
 } 
 
@@ -17,6 +15,9 @@ clear: both;
 }
 .u-footer {
   background-image: none;
+  bottom:0;
+  position:fixed;
+  width:100%;
 }
 .u-grey-80 {
   color: #ffffff;
@@ -67,6 +68,6 @@ margin-top: 20px;
 }
 .u-footer .u-text-1 {
     width: 417px;
-    margin: 25px auto;
+    margin: 17px auto;
     color:white;
   } 

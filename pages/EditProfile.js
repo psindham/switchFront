@@ -1,6 +1,5 @@
 import { Col, Form, Row } from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
-import undrawReg from "../comps/svg/register.svg";
 import CustInput from "../comps/CustInput/CustInput";
 //import DatePicker from "react-date-picker";
 import Datetime from "react-datetime";

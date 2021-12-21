@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
 
-const CustButton = ({val}) => {
+const CustButton = ({type,val, onclick}) => {
     return ( 
-        <Button className="CustButton themecolor" variant="success">{val}</Button>
+        <Button className="CustButton themecolor" type={type} variant="success" onClick={onclick}>{val}</Button>
     );
 }
  
