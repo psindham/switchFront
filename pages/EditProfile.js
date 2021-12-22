@@ -1,8 +1,6 @@
 import { Col, Form, Row,Modal,Button } from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
 import CustInput from "../comps/CustInput/CustInput";
-//import DatePicker from "react-date-picker";
-import Datetime from "react-datetime";
 import { useState } from "react";
 
 const EditProfile = () => {
@@ -64,7 +62,7 @@ const EditProfile = () => {
     <section className="u-clearfix u-section-1" id="sec-4b2d">
         <Modal show={show}>
         <Modal.Header className="themecolor">
-          Listen
+          Note:
         </Modal.Header>
         <Modal.Body>
           {error}

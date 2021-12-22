@@ -11,7 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import CustButton from "../comps/CustButton/CustButton"
 import FormData from 'form-data';
 import Router from 'next/router';
-import { useStoreState } from "easy-peasy";
+// import { useStoreState } from "easy-peasy";
 
 const url = "https://switchfood.herokuapp.com";
 var subFile;
@@ -19,7 +19,6 @@ var subFile;
 function onFileChange(fileChangeEvent) {
    fileChangeEvent.preventDefault();
    subFile = fileChangeEvent.target.files[0];
-   console.log("Hello");
 };
 
 function uploadFile(){
@@ -41,11 +40,11 @@ function uploadFile(){
 }
 
 const SearchPage = () => {
-  const {name} = useStoreState((store)=>store);
+  // const {name} = useStoreState((store)=>store);
   return (
     <Container>
       <Row className="align-items-center">
-        <Col><h3><p className="themecolortext">FooBit Search{name}</p></h3></Col>
+        <Col><h3><p className="themecolortext">FooBit Search</p></h3></Col>
       </Row>
       <Row>
         <Col xs="5">

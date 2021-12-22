@@ -38,11 +38,12 @@ const SignInPage = () => {
     fetch(url+"/user/login/", requestOptions)
     .then(response => response.text())
     .then(result => {
-        if(result.statusCode===undefined)
+        if(result===undefined)
         {
           alert("invalid Password or Username!");
         }else{
           console.log(result);
+          localStorage.setItem('result',result);
           Router.push('/dashboard');
         }
       })

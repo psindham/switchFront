@@ -1,9 +1,9 @@
 import { Col, Form, Row ,Modal,Button} from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
 import CustInput from "../comps/CustInput/CustInput";
-//import DatePicker from "react-date-picker";
-import Datetime from "react-datetime";
 import { useState } from "react";
+
+
 const SignUpPage = () => {
   const url = "https://switchdiet.herokuapp.com";
   const [email, setEmail] = useState('');
@@ -93,6 +93,7 @@ const SignUpPage = () => {
         })
         .catch(error => console.log('error', error));
   }
+
   return (
     <section className="u-clearfix u-section-1" id="sec-4b2d">
       <div className="u-clearfix u-sheet u-sheet-1">

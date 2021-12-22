@@ -11,15 +11,17 @@ import '../styles/FoodDetails.css'
 import "../styles/SearchPage.css";
 import "../styles/SignUp.css";
 
-import {StateProvider} from "easy-peasy";
+// import {StateProvider} from "easy-peasy";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <StateProvider store='/store'>
+    
     <Layout>
+      {/* <StateProvider store={'/store/index'}> */}
       <Component {...pageProps}/>
+      {/* </StateProvider> */}
     </Layout>
-    </StateProvider>
+     
   )
 }
 
