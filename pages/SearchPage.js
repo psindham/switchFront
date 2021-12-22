@@ -10,40 +10,42 @@ import {
 import { FaSearch } from "react-icons/fa";
 import CustButton from "../comps/CustButton/CustButton"
 import FormData from 'form-data';
+import Router from 'next/router';
+import { useStoreState } from "easy-peasy";
+
 const url = "https://switchfood.herokuapp.com";
 var subFile;
- 
-function uploadFile(){
-  console.log("Hello");
-  if(subFile === undefined) {return}
-  const fd = new FormData();
-  fd.append('image', subFile);
-  fetch(url+"/food/image/", {
-      method: 'POST',
-      origin: '*',
-      mode:'cors',
-      header :{
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type":"form-data",
-        "Accept": "application/json"
-      },
-      body: fd
-  })
-  .then(res => {console.log(res)})
-  .then(json => console.log(json))
-  .catch(err => console.error(err));
-} ;
+
 function onFileChange(fileChangeEvent) {
    fileChangeEvent.preventDefault();
    subFile = fileChangeEvent.target.files[0];
    console.log("Hello");
 };
 
+function uploadFile(){
+  var formdata = new FormData();
+    formdata.append("image",subFile);
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+    fetch("https://switchfood.herokuapp.com/food/Image", requestOptions)
+    .then(response => response.text())
+    .then(result => { 
+        console.log(result);
+        Router.push('/foodinfo');
+      })
+    .catch(error => console.log('error', error)); 
+}
+
 const SearchPage = () => {
+  const {name} = useStoreState((store)=>store);
   return (
     <Container>
       <Row className="align-items-center">
-        <Col><h3><p className="themecolortext">FooBit Search</p></h3></Col>
+        <Col><h3><p className="themecolortext">FooBit Search{name}</p></h3></Col>
       </Row>
       <Row>
         <Col xs="5">

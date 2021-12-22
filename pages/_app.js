@@ -11,11 +11,15 @@ import '../styles/FoodDetails.css'
 import "../styles/SearchPage.css";
 import "../styles/SignUp.css";
 
+import {StateProvider} from "easy-peasy";
+
 function MyApp({ Component, pageProps }) {
   return (
+    <StateProvider store='/store'>
     <Layout>
       <Component {...pageProps}/>
     </Layout>
+    </StateProvider>
   )
 }
 
