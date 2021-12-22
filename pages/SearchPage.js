@@ -11,10 +11,13 @@ import { FaSearch } from "react-icons/fa";
 import CustButton from "../comps/CustButton/CustButton"
 import FormData from 'form-data';
 import Router from 'next/router';
-// import { useStoreState } from "easy-peasy";
+import { useEffect,useState } from "react";
+import  localstorage  from "local-storage";
+
 
 const url = "https://switchfood.herokuapp.com";
 var subFile;
+
 
 function onFileChange(fileChangeEvent) {
    fileChangeEvent.preventDefault();
@@ -22,7 +25,7 @@ function onFileChange(fileChangeEvent) {
 };
 
 function uploadFile(){
-  var formdata = new FormData();
+    var formdata = new FormData();
     formdata.append("image",subFile);
 
     var requestOptions = {
@@ -33,16 +36,25 @@ function uploadFile(){
     fetch("https://switchfood.herokuapp.com/food/Image", requestOptions)
     .then(response => response.text())
     .then(result => { 
-        console.log(result);
-        Router.push('/foodinfo');
+      console.log(result);
+        result = JSON.stringify(result);
+          setTimeout(() => {
+            localstorage.set('fooditem',result);
+            Router.push('/foodinfo');
+        }, 200);
       })
     .catch(error => console.log('error', error)); 
 }
 
+
+
+
+
 const SearchPage = () => {
-  // const {name} = useStoreState((store)=>store);
+
   return (
     <Container>
+      
       <Row className="align-items-center">
         <Col><h3><p className="themecolortext">FooBit Search</p></h3></Col>
       </Row>

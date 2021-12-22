@@ -2,7 +2,7 @@ import { Col, Container, Form, Row,Modal,Button } from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
 import Router from 'next/router';
 import { useState } from 'react';
-
+import  localstorage  from "local-storage";
 
 
 const SignInPage = () => {
@@ -43,7 +43,10 @@ const SignInPage = () => {
           alert("invalid Password or Username!");
         }else{
           console.log(result);
-          localStorage.setItem('result',result);
+          // result = JSON.stringify(result);
+          setTimeout(() => {
+            localstorage.set('userdata',result);  
+          }, 1000);
           Router.push('/dashboard');
         }
       })
