@@ -16,12 +16,12 @@ const EditProfile = () => {
   const [gender, setGender] = useState('');
   const [country, setCountry] = useState('');
   const [date, setDate] = useState('');
-  const [error, setError] = useState('Invalid Password!');
+  const [error, setError] = useState('');
   const [show, setShow] = useState(false);
   function toggleFalse(){
      setShow(false);
   }
-
+ 
   function update(){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -52,9 +52,13 @@ const EditProfile = () => {
         console.log(result);
         if(result===undefined)
         {
-          alert("Invalid Data");
+          setShow(true);
+          setError("Updated Successfully");
         }else{
-          alert("Data Updated");
+          if(result!=undefined) {
+            setShow(true);
+            setError("Updated Successfully");
+        }     
         }
       })
       .catch(error => console.log('error', error));

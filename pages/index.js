@@ -1,10 +1,3 @@
-
-import undrawMint from "../public/images/undraw_mint_tea_7su01.png";
-
-import undrawVisual from "../public/images/undraw_visual_data_re_mxxo.png";
-import undrawArtificial from "../public/images/undraw_Artificial_intelligence_re_enpp.png";
-import undrawBreakFast from "../public/images/undraw_breakfast_psiw.png";
-
 import SignUpButton from "../comps/SignUpButton/SignUpButton";
 import { Col, Container, Row } from "react-bootstrap";
 import DisplayCard from "../comps/DisplayCard/Card";
@@ -22,7 +15,7 @@ const HomePage = () => {
             Switch helps you to transform your unhealthy lifestyle into a
             Healthy Lifestyle.
           </p>
-          <SignUpButton />
+          <a class="nav-link active" aria-current="page" href="/SignUpPage"><SignUpButton /></a>
         </Col>
         <Col className="containterOfImage">
           <img src='/images/undraw_mint_tea_7su01.png' alt="" />

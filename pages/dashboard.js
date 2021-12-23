@@ -1,9 +1,8 @@
-import Button from "../comps/Button/Button";
 import DisplayCard from "../comps/DisplayCard/Card"
 import UDinput from "../comps/input";
 import {Form,FormControl, NavItem} from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row,Modal,Button } from "react-bootstrap";
 import  localstorage  from "local-storage";
 import { useState,useEffect } from "react";
 
@@ -26,7 +25,11 @@ const selection  = () => {
   const [Snackfats,setSnackfats]= useState('');
   const [Dinnerprotein,setDinnerprotein]= useState('');
   const [Dinnercarbs,setDinnercarbs]= useState('');
-
+  const [error, setError] = useState('Invalid Password!');
+  const [show, setShow] = useState(false);
+  function toggleFalse(){
+     setShow(false);
+  }
   useEffect(() => {
     userdata = JSON.parse(localstorage.get('userdata'))
     
@@ -56,7 +59,12 @@ const selection  = () => {
                   }  
           };
           fetchData();
+          setvalues();
         
+    
+}, [])
+
+  function setvalues(){
     setTimeout(function() {
       setBreakfastfruit(diet.Breakfast[0]);
       setBreakfastprotein(diet.Breakfast[1]);
@@ -67,9 +75,8 @@ const selection  = () => {
       setSnackfats(diet.Snack[1]);
       setDinnerprotein(diet.Dinner[0]);
       setDinnercarbs(diet.Dinner[1]);
-    },5000);
-}, [])
-  
+    },1000);
+  }
 
 // useEffect(() =>{
 //   userdata = JSON.parse(localstorage.get('userdata'));
@@ -126,17 +133,42 @@ function updatediet(){
             body: raw,
             redirect: 'follow'
           };
-
-    fetch("https://switchdiet.herokuapp.com/user/diet", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-    
+          
+          const fetchData = async () => {
+            try {
+              const response= await fetch("https://switchdiet.herokuapp.com/user/diet", requestOptions)
+              diet = await response.json();
+              console.log(diet);
+              if(diet!=undefined) {
+                  setShow(true);
+                  setError("Updated Successfully");
+              }               
+        } catch (error) {
+                  console.log("error", error);
+                }  
+        };
+        fetchData();
+        setvalues();
+      //   fetch("https://switchdiet.herokuapp.com/user/diet", requestOptions)
+      // .then(response => response.text())
+      // .then(result => console.log(result))
+      // .catch(error => console.log('error', error));
 }
 
 
   return (
     <div>
+      <Modal show={show}>
+        <Modal.Header>
+          Notification...
+        </Modal.Header>
+        <Modal.Body>
+          {error}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="themecolor" onClick={toggleFalse}>Okay!</Button>
+        </Modal.Footer>
+      </Modal>
         <h3 className="themecolortext al-center mt-2">Dashboard</h3>
       <Row>
           <Col xs={2}></Col>
