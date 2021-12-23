@@ -2,6 +2,7 @@ import { Col, Form, Row ,Modal,Button} from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
 import CustInput from "../comps/CustInput/CustInput";
 import { useState } from "react";
+import Router from 'next/router';
 
 
 const SignUpPage = () => {
@@ -15,7 +16,6 @@ const SignUpPage = () => {
   const [gender, setGender] = useState('');
   const [country, setCountry] = useState('');
   const [date, setDate] = useState('');
-
   const [error, setError] = useState('Invalid Password!');
   const [show, setShow] = useState(false);
   function toggleFalse(){
@@ -24,10 +24,8 @@ const SignUpPage = () => {
 
 
   function login(){
-  
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-  
     console.log(email, password);
     var raw = JSON.stringify(
       {
@@ -46,9 +44,10 @@ const SignUpPage = () => {
     fetch(url+"/user/login/", requestOptions)
     .then(response => response.text())
     .then(result => {
-        if(result===undefined)
+        if(result===undefined || result==null)
         {
-          alert("invalid Password or Username!");
+          setError("invalid Password or Username!");
+          setShow(true);
         }else{
           console.log(result.statusCode);
           Router.push('/dashboard');
@@ -91,7 +90,7 @@ const SignUpPage = () => {
             login();
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {console.log('error', error);alert("Invalid Data");});
   }
 
   return (
@@ -130,8 +129,8 @@ const SignUpPage = () => {
                 label={"DOB"}
                 placeholder={"Enter Your DOB"}
                 typeInput={"date"}
-                id='gender'
-                onChange={e => setDate(e.target.value)}
+                id='dob'
+                onChange={e => {setDate(e.target.value);}}
               />
               <Form.Select className="bordercolor mt-2" aria-label="Gender" id="gender" onChange={e => setGender(e.target.value)}>
                 <option>Gender</option>
@@ -140,9 +139,9 @@ const SignUpPage = () => {
               </Form.Select>
               <Form.Select className="bordercolor mt-2" aria-label="Country" id="country" onChange={e => setCountry(e.target.value)}>
                 <option>Country</option>
-                <option value="Male">India</option>
-                <option value="Female">Canada</option>
-                <option value="Others">China</option>
+                <option value="India">India</option>
+                <option value="Canada">Canada</option>
+                <option value="China">China</option>
               </Form.Select>
               <CustInput
                 label={"Food Preference"}
@@ -159,6 +158,12 @@ const SignUpPage = () => {
               <Row className="mt-2">
                 <Col>
               <CustButton type="button" val="Signup" onclick={signup}/>
+              </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col>
+                Already have an account ? &nbsp;
+                <a href="/SignInPage">Sign in</a>
               </Col>
               </Row>
             </Form>

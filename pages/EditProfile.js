@@ -1,10 +1,12 @@
 import { Col, Form, Row,Modal,Button } from "react-bootstrap";
 import CustButton from "../comps/CustButton/CustButton";
 import CustInput from "../comps/CustInput/CustInput";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import  localstorage  from "local-storage";
+import Router from 'next/router';
 
 const EditProfile = () => {
+  var userdata;
   const url = "https://switchdiet.herokuapp.com";
   const [id,setID]= useState('');
   const [email, setEmail] = useState('');
@@ -21,7 +23,26 @@ const EditProfile = () => {
   function toggleFalse(){
      setShow(false);
   }
- 
+ useEffect(() => {
+   
+    userdata = JSON.parse(localstorage.get('userdata'))
+    if(userdata==null){
+      Router.push('/');
+    }else{
+      setTimeout(function() {
+        setID(userdata['user']['_id'])
+        setEmail(userdata['user']['Email']);
+        setName(userdata['user']['Firstname']);
+        setGender(userdata['user']['Gender']);
+        setCountry(userdata['user']['Country']);
+        setFoodpreferences(userdata['user']['FoodPreference']);
+        setDate(userdata['user']['Date']);
+        setWeight(userdata['user']['Weight']);
+        setHeight(userdata['user']['Height']);
+        setDate(userdata['user']['Date']);
+      }, 100);
+    }
+  }, [])
   function update(){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -64,21 +85,12 @@ const EditProfile = () => {
       .catch(error => console.log('error', error));
   }
 
-  var userdata;
-  userdata = JSON.parse(localstorage.get('userdata'));
-  
-  setTimeout(function() {
-    setID(userdata['user']['_id'])
-    setEmail(userdata['user']['Email']);
-    setName(userdata['user']['Firstname']);
-    setGender(userdata['user']['Gender']);
-    setCountry(userdata['user']['Country']);
-    setFoodpreferences(userdata['user']['FoodPreference']);
-    setDate(userdata['user']['Date']);
-    setWeight(userdata['user']['Weight']);
-    setHeight(userdata['user']['Height']);
-    setDate(userdata['user']['Date']);
-  }, 100);
+  // var userdata;
+  // userdata = JSON.parse(localstorage.get('userdata'));
+  //   if(userdata==null){
+  //     Router.push('/dashboard');
+  //   }
+
 
   return (
     <section className="u-clearfix u-section-1" id="sec-4b2d">

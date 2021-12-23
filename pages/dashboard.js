@@ -5,6 +5,7 @@ import CustButton from "../comps/CustButton/CustButton";
 import { Col, Container, Row,Modal,Button } from "react-bootstrap";
 import  localstorage  from "local-storage";
 import { useState,useEffect } from "react";
+import Router from 'next/router'
 
 const selection  = () => {
   var diet;
@@ -27,41 +28,46 @@ const selection  = () => {
   const [Dinnercarbs,setDinnercarbs]= useState('');
   const [error, setError] = useState('Invalid Password!');
   const [show, setShow] = useState(false);
+  const [Rcalories, setRcalories] = useState('');
   function toggleFalse(){
      setShow(false);
   }
   useEffect(() => {
     userdata = JSON.parse(localstorage.get('userdata'))
-    
- 
-      // console.log(userdata);
-      setID(userdata['user']['_id']);
-      // console.log(userdata.token,userdata['user']['_id']);
-      setToken(userdata.token);
-    
+    setTimeout(() => {
+      // if(userdata==null){
+      //   Router.push('/');
+      // }else{
+        // console.log(userdata);
+        setID(userdata['user']['_id']);
+        // console.log(userdata.token,userdata['user']['_id']);
+        setToken(userdata.token);
+      
+  
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization",userdata['token']);
+        myHeaders.append("Content-Type", "application/json");
+  
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+          redirect: 'follow'
+        };
+            const fetchData = async () => {
+                try {
+                  const response= await fetch("https://switchdiet.herokuapp.com/user/"+userdata['user']['_id']+"/diet", requestOptions);
+                  diet = await response.json();
+                  console.log(diet);                
+            } catch (error) {
+                      console.log("error", error);
+                    }  
+            };
+            fetchData();
+            setvalues();
+          
+          
+    }, 3000);
 
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization",userdata['token']);
-      myHeaders.append("Content-Type", "application/json");
-
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-          const fetchData = async () => {
-              try {
-                const response= await fetch("https://switchdiet.herokuapp.com/user/"+userdata['user']['_id']+"/diet", requestOptions);
-                diet = await response.json();
-                console.log(diet);                
-          } catch (error) {
-                    console.log("error", error);
-                  }  
-          };
-          fetchData();
-          setvalues();
-        
-    
 }, [])
 
   function setvalues(){
@@ -75,7 +81,8 @@ const selection  = () => {
       setSnackfats(diet.Snack[1]);
       setDinnerprotein(diet.Dinner[0]);
       setDinnercarbs(diet.Dinner[1]);
-    },1000);
+      setRcalories(diet.Requiredcalories);
+    },2000);
   }
 
 // useEffect(() =>{
@@ -229,8 +236,14 @@ function updatediet(){
             </div>
           </Form>
         </Col>
-        <Col xs={5} className="al-center">
-        <DisplayCard image={"images/undraw_Personal_goals_re_iow7.png"}/>
+        <Col xs={5} >
+          <Row>
+            <Col xs={12} className="al-center">
+            <h4 className="themecolortext al-center mt-2">Required calories per :  <span className="text-danger">&nbsp;{Rcalories}</span></h4>
+            </Col>
+            </Row>
+          <br/>
+          <Row> <Col xs={12}><DisplayCard image={"images/undraw_Personal_goals_re_iow7.png"}/></Col></Row>
         </Col>
       </Row>
   </div>

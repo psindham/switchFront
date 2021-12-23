@@ -1,7 +1,23 @@
 import SignUpButton from "../comps/SignUpButton/SignUpButton";
+import CustButton from "../comps/CustButton/CustButton";
 import { Col, Container, Row } from "react-bootstrap";
 import DisplayCard from "../comps/DisplayCard/Card";
+import { useState,useEffect } from 'react';
+import localstorage from 'local-storage';
+
 const HomePage = () => {
+
+  const [loggedin,setLoggedin]= useState(false);
+  useEffect(() => {
+    var userdata;
+    userdata = JSON.parse(localstorage.get('userdata'));
+      if(userdata==null){
+        setLoggedin(false);
+      }else{
+        setLoggedin(true);
+      }
+  }, []);
+
   let displayCards = [
     <DisplayCard image={`/images/undraw_Artificial_intelligence_re_enpp.png`} title={`Food Image recognizer`} />,
     <DisplayCard image={`/images/undraw_breakfast_psiw.png`} title={`Diet Generator`} />,
@@ -15,7 +31,8 @@ const HomePage = () => {
             Switch helps you to transform your unhealthy lifestyle into a
             Healthy Lifestyle.
           </p>
-          <a class="nav-link active" aria-current="page" href="/SignUpPage"><SignUpButton /></a>
+         {!loggedin?(<a class="nav-link active" aria-current="page" href="/SignUpPage"><SignUpButton /></a>)
+         :(<a class="nav-link active" aria-current="page" href="/dashboard"><CustButton val="Goto Dashboard"/></a>)} 
         </Col>
         <Col className="containterOfImage">
           <img src='/images/undraw_mint_tea_7su01.png' alt="" />
